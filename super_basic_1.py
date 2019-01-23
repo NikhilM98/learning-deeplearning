@@ -15,15 +15,6 @@ from sklearn.preprocessing import MinMaxScaler
 train_labels = []
 train_samples = []
 
-for i in range(1000):
-    random_younger = randint(13, 64)
-    train_samples.append(random_younger)
-    train_labels.append(0)
-
-    random_older = randint(65, 100)
-    train_samples.append(random_older)
-    train_labels.append(1)
-
 for i in range(50):
     random_younger = randint(13, 64)
     train_samples.append(random_younger)
@@ -32,6 +23,15 @@ for i in range(50):
     random_older = randint(65, 100)
     train_samples.append(random_older)
     train_labels.append(0)
+
+for i in range(1000):
+    random_younger = randint(13, 64)
+    train_samples.append(random_younger)
+    train_labels.append(0)
+
+    random_older = randint(65, 100)
+    train_samples.append(random_older)
+    train_labels.append(1)
 
 # -> Preprocessing
 
@@ -54,9 +54,9 @@ model = Sequential([
 # model.add(Dense(5, input_shape=(3,)))
 # model.add(Activation('relu'))
 
-model.compile(Adam(lr=100), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.compile(Adam(lr=0.0001), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-model.loss='sparse_categorical_crossentropy'
-model.loss
+# model.loss='sparse_categorical_crossentropy'
+# model.loss
 
-model.fit(scaled_train_samples, train_labels, batch_size=10, epochs=20, shuffle=True, verbose=2)
+model.fit(scaled_train_samples, train_labels, validation_split=0.1, batch_size=10, epochs=20, shuffle=True, verbose=2)
